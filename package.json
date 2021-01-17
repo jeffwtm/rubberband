@@ -1,0 +1,28 @@
+{
+  "name": "gamemaker-rubberband",
+  "scripts": {
+    "build": "node build.js",
+    "clear": "node clearCache.js",
+    "deploy": "node deploy.js",
+    "debug": "node debug.js",
+    "start": "node cli.js"
+  },
+  "dependencies": {
+    "@node-steam/vdf": "^2.1.0",
+    "adm-zip": "^0.5.1",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "config-yaml": "^1.1.6",
+    "figlet": "^1.5.0",
+    "fs-extra": "^9.0.1",
+    "gamemaker-rubber": "D:/Dev Projects/Rubber/",
+    "inquirer": "^7.3.3",
+    "node-vdf": "^0.0.3",
+    "relaxed-json": "^1.0.3",
+    "scp2": "^0.5.0",
+    "simple-vdf": "^1.1.1",
+    "simple-vdf2": "^1.2.1",
+    "ssh2-promise": "^0.1.7",
+    "vdf-parser": "^1.1.0"
+  }
+}
