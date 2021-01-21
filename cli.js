@@ -89,7 +89,7 @@ const run = async () => {
     console.log();
 
     console.log('Flexing...');
-    const builds = await prepareBuilds(options);
+    const { builds, deploymentModules } = await prepareBuilds(options);
     // console.log(builds);
     console.log('Done.');
     console.log();
@@ -121,10 +121,8 @@ const run = async () => {
         console.time('deploy');
 
         console.log('Releasing...');
-        for (const build of builds) {
-            // console.log(build.deploymentModule);
-            await build.deploymentModule.deploy(build);
-        }
+        for (const deploymentModule in deploymentModules)
+        await deploymentModules[deploymentModule].deploy(builds);
         
         console.timeEnd('deploy');
     }

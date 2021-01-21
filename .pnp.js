@@ -37,22 +37,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
-            ["@node-steam/vdf", "npm:2.1.0"],
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=af4043&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
             ["scp2", "npm:0.5.0"],
-            ["simple-vdf", "npm:1.1.1"],
-            ["simple-vdf2", "npm:1.2.1"],
-            ["ssh2-promise", "npm:0.1.7"],
-            ["vdf-parser", "npm:1.1.0"]
+            ["ssh2-promise", "npm:0.1.7"]
           ],
           "linkType": "SOFT",
         }]
@@ -63,15 +59,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@heroku/socksv5", "npm:0.0.9"],
             ["ip-address", "npm:5.9.4"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@node-steam/vdf", [
-        ["npm:2.1.0", {
-          "packageLocation": "./.yarn/cache/@node-steam-vdf-npm-2.1.0-13542de241-e7021419a8.zip/node_modules/@node-steam/vdf/",
-          "packageDependencies": [
-            ["@node-steam/vdf", "npm:2.1.0"]
           ],
           "linkType": "HARD",
         }]
@@ -552,10 +539,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gamemaker-rubber", [
-        ["file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=af4043&locator=gamemaker-rubberband%40workspace%3A.", {
-          "packageLocation": "./.yarn/cache/gamemaker-rubber-file-9c8687bf2d-2b6b4f6e16.zip/node_modules/gamemaker-rubber/",
+        ["file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A.", {
+          "packageLocation": "./.yarn/cache/gamemaker-rubber-file-c6f0f30888-b02fb4771a.zip/node_modules/gamemaker-rubber/",
           "packageDependencies": [
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=af4043&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
             ["chalk", "npm:2.4.2"],
             ["cli", "npm:1.0.1"],
             ["fs-extra", "npm:7.0.1"]
@@ -568,22 +555,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["gamemaker-rubberband", "workspace:."],
-            ["@node-steam/vdf", "npm:2.1.0"],
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=af4043&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
             ["scp2", "npm:0.5.0"],
-            ["simple-vdf", "npm:1.1.1"],
-            ["simple-vdf2", "npm:1.2.1"],
-            ["ssh2-promise", "npm:0.1.7"],
-            ["vdf-parser", "npm:1.1.0"]
+            ["ssh2-promise", "npm:0.1.7"]
           ],
           "linkType": "SOFT",
         }]
@@ -1090,24 +1073,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["simple-vdf", [
-        ["npm:1.1.1", {
-          "packageLocation": "./.yarn/cache/simple-vdf-npm-1.1.1-fc6effe25a-566b9a79a8.zip/node_modules/simple-vdf/",
-          "packageDependencies": [
-            ["simple-vdf", "npm:1.1.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["simple-vdf2", [
-        ["npm:1.2.1", {
-          "packageLocation": "./.yarn/cache/simple-vdf2-npm-1.2.1-7e5ec64835-354ee8efd4.zip/node_modules/simple-vdf2/",
-          "packageDependencies": [
-            ["simple-vdf2", "npm:1.2.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["sprintf-js", [
         ["npm:1.0.3", {
           "packageLocation": "./.yarn/cache/sprintf-js-npm-1.0.3-73f0a322fa-51df1bce9e.zip/node_modules/sprintf-js/",
@@ -1336,15 +1301,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-typed-array", "npm:1.1.4"],
             ["safe-buffer", "npm:5.2.1"],
             ["which-typed-array", "npm:1.1.4"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["vdf-parser", [
-        ["npm:1.1.0", {
-          "packageLocation": "./.yarn/cache/vdf-parser-npm-1.1.0-7d86eac3d0-8229b767f6.zip/node_modules/vdf-parser/",
-          "packageDependencies": [
-            ["vdf-parser", "npm:1.1.0"]
           ],
           "linkType": "HARD",
         }]
