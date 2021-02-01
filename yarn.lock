@@ -241,6 +241,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "commander@npm:7.0.0"
+  checksum: 46e60cb1e1ccc3e8d4bac5672d4be08cb60d0a0c22d0c352ba9f9713a11996e79a67216ace4dc32a04ee621c86c9a327f0c35126e4aaf3ede3004f78a009cb19
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -426,14 +433,14 @@ __metadata:
 
 "gamemaker-rubber@file:D:/Dev Projects/Rubber/::locator=gamemaker-rubberband%40workspace%3A.":
   version: 3.0.1
-  resolution: "gamemaker-rubber@file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."
+  resolution: "gamemaker-rubber@file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."
   dependencies:
     chalk: ^2.4.1
     cli: ^1.0.1
     fs-extra: ^7.0.0
   bin:
     rubber: ./out/cli.js
-  checksum: b02fb4771ae31095c2e9404abacb5dba97b86e2b431a8c8e53f1d56d586513d6479a93138614890d54e5701eeb1f9a65ba6820d4d12a2d84583a8b7f70c6d8d9
+  checksum: dfe4b2ea2f6ce1b33362ca3033044b524c2db65bdc197eb083c551e53b86bd865315e6ecd89a9a6cd019a1bfb41a18f4fb33c3e1b4cae97d622193e5e554a304
   languageName: node
   linkType: hard
 
@@ -444,6 +451,7 @@ __metadata:
     adm-zip: ^0.5.1
     axios: ^0.21.1
     chalk: ^4.1.0
+    commander: ^7.0.0
     config-yaml: ^1.1.6
     figlet: ^1.5.0
     fs-extra: ^9.0.1

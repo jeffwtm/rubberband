@@ -1,12 +1,23 @@
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const figlet = require("figlet");
+const fse = require('fs-extra');
+const { program } = require('commander');
 const config_yaml = require('config-yaml');
 const { prepareBuilds } = require("./lib/build");
 
+program.version('0.0.1');
 const config = config_yaml(__dirname + '/config.yml');
+let args = {};
+let _stdout, _stderr;
 
 const init = () => {
+    program
+        .option('-s, --skip-building', 'only perform pre & post build tasks during build step');
+
+    program.parse(process.argv);
+    args = program.opts();
+    
     console.log("--")
     console.log("-----")
     console.log("--------")
@@ -20,6 +31,9 @@ const init = () => {
         })
       )
     );
+
+    if (args.skipBuilding)
+        console.log('Skip building enabled.');
 }
 
 const prepareQuestions = () => {
@@ -78,10 +92,26 @@ const prepareQuestions = () => {
     ];
 }
 
+const startLogging = (file) => {
+    const log = fse.createWriteStream(file);
+    _stdout = process.stdout.write;
+    _stdout = process.stderr.write;
+    process.stdout.write = process.stderr.write = log.write.bind(log);
+    process.on('uncaughtException', function(err) {
+        finishLogging();
+        console.error((err && err.stack) ? err.stack : err);
+    });
+}
+
+const finishLogging = () => {
+    process.stdout.write = _stdout;
+    process.stderr.write = _stderr;
+}
+
 const run = async () => {
     init();
 
-    const skipBuilding = false;
+    const {skipBuilding} = args;
 
     const prompts = prepareQuestions();
     const options = await inquirer.prompt(prompts);
@@ -99,8 +129,10 @@ const run = async () => {
     
         console.log('Stretching...');
         for (const build of builds) {
+            startLogging(__dirname + `/log/${build.compileOptions.platform}.log`);
             console.log(build.module);
             await build.module.build(build, skipBuilding);
+            finishLogging();
         }
 
         console.timeEnd('build');

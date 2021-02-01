@@ -11,6 +11,7 @@
     "adm-zip": "^0.5.1",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "commander": "^7.0.0",
     "config-yaml": "^1.1.6",
     "figlet": "^1.5.0",
     "fs-extra": "^9.0.1",

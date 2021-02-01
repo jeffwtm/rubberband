@@ -40,10 +40,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
+            ["commander", "npm:7.0.0"],
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
@@ -318,6 +319,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commander", "npm:2.20.3"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:7.0.0", {
+          "packageLocation": "./.yarn/cache/commander-npm-7.0.0-6bc4e90c1f-46e60cb1e1.zip/node_modules/commander/",
+          "packageDependencies": [
+            ["commander", "npm:7.0.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["concat-map", [
@@ -539,10 +547,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["gamemaker-rubber", [
-        ["file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A.", {
-          "packageLocation": "./.yarn/cache/gamemaker-rubber-file-c6f0f30888-b02fb4771a.zip/node_modules/gamemaker-rubber/",
+        ["file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A.", {
+          "packageLocation": "./.yarn/cache/gamemaker-rubber-file-81cce40d41-dfe4b2ea2f.zip/node_modules/gamemaker-rubber/",
           "packageDependencies": [
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
             ["chalk", "npm:2.4.2"],
             ["cli", "npm:1.0.1"],
             ["fs-extra", "npm:7.0.1"]
@@ -558,10 +566,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
+            ["commander", "npm:7.0.0"],
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=7eb225&locator=gamemaker-rubberband%40workspace%3A."],
+            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
