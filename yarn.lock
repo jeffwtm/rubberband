@@ -14,6 +14,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@incominggames/gamemaker-rubber@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@incominggames/gamemaker-rubber@npm:3.0.1"
+  dependencies:
+    chalk: ^2.4.1
+    cli: ^1.0.1
+    fs-extra: ^7.0.0
+  bin:
+    rubber: out/cli.js
+  checksum: ae6b55ecc4adc46a460cbeb5a24c37197115373522cc0e3aad3d4553a88eafaba1b405f0f43c037c0534ee1ed4d3bb25e60cd5c22fccb5e61f4f71612f45f048
+  languageName: node
+  linkType: hard
+
 "adm-zip@npm:^0.5.1":
   version: 0.5.1
   resolution: "adm-zip@npm:0.5.1"
@@ -431,23 +444,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gamemaker-rubber@file:D:/Dev Projects/Rubber/::locator=gamemaker-rubberband%40workspace%3A.":
-  version: 3.0.1
-  resolution: "gamemaker-rubber@file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."
-  dependencies:
-    chalk: ^2.4.1
-    cli: ^1.0.1
-    fs-extra: ^7.0.0
-  bin:
-    rubber: ./out/cli.js
-  checksum: dfe4b2ea2f6ce1b33362ca3033044b524c2db65bdc197eb083c551e53b86bd865315e6ecd89a9a6cd019a1bfb41a18f4fb33c3e1b4cae97d622193e5e554a304
-  languageName: node
-  linkType: hard
-
 "gamemaker-rubberband@workspace:.":
   version: 0.0.0-use.local
   resolution: "gamemaker-rubberband@workspace:."
   dependencies:
+    "@incominggames/gamemaker-rubber": ^3.0.1
     adm-zip: ^0.5.1
     axios: ^0.21.1
     chalk: ^4.1.0
@@ -455,7 +456,6 @@ __metadata:
     config-yaml: ^1.1.6
     figlet: ^1.5.0
     fs-extra: ^9.0.1
-    gamemaker-rubber: "D:/Dev Projects/Rubber/"
     inquirer: ^7.3.3
     node-vdf: ^0.0.3
     relaxed-json: ^1.0.3
@@ -503,7 +503,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0":
+"graceful-fs@npm:^4.1.2":
+  version: 4.2.6
+  resolution: "graceful-fs@npm:4.2.6"
+  checksum: 84d39c7756892553da990a9db7e45f844b3309b37b5a00174cbb4748476f2250c54f24594d4d252f64f085c65c2fdac7c809419bf6d55f0e6e42eb07ac0f5bf2
+  languageName: node
+  linkType: hard
+
+"graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0":
   version: 4.2.4
   resolution: "graceful-fs@npm:4.2.4"
   checksum: d095ee4dc6eacc76814cd52d5d185b860119378a6fd4888e7d4e94983095c54d4f6369942a5e3d759cdbdd4e3ee7eaeb27a39ff938c6ee4610894fd9de46b6cb

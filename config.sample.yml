@@ -1,0 +1,100 @@
+global:
+  gamemakerPath: 'C:\Program Files\GameMaker Studio 2\' #path to your GMS install
+  tempFolder: 'C:\Cache\GameMaker' #any custom folder you want, should probably be separate from GM's temp folder to avoid conflicts
+  deviceConfigFileLocation: 'C:\Users\<user>\AppData\Roaming\GameMakerStudio2\<gm_user>\devices.json' #path to your GMS devices.json file, this contains your config for external mac/linux devices needed to build
+platforms: #configuration for all available build platforms
+  windows:
+    name: 'Windows'
+    module: './build/windows' #path to the javascript module that will handle builds for this platform
+    optionsFile: 'options/windows/options_windows.yy' #relative path to the options file in the GMS project for this platform
+    optionsVersionKey: 'option_windows_version'
+    architectures: #which architectures does this platform support
+      x64:
+        buildFolder: 'Windows'
+      x86:
+        buildFolder: 'Windows32'
+  mac:
+    name: 'macOS'
+    module: './build/mac'
+    optionsFile: 'options/mac/options_mac.yy'
+    optionsVersionKey: 'option_mac_version'
+    targetDeviceName: "<mac device name as defined in GM>" #this should be the display name you chose when configuring your mac device in GMS, e.g. "Macbook Pro", "My iMac", etc
+    moduleConfig: #some platforms require specific
+      host: '<mac ip address>'
+      username: '<mac username>'
+      password: '<mac password>'
+      buildPath: "/Users/<mac username>/<path/to/build>" #the base path where you want the build, signing, and notarization output to be stored. doesn't have to be under Users, as long as the logged in user has permissions for it
+      appleUser: "<apple id email>" #your apple developer account email (the one used for login)
+      applePassword: "<apple id password>" #this needs to be a single-use password generated with apple to bypass 2FA
+      providerShortName: "<team identifier>" #your team identifier from your apple dev account. alphanumeric, something along the lines of ABCDE1234
+      signingCertificate: 'Developer ID Application: <company/team name> (<team identifier>)' #the signing certificate you want to use. this has to be registered on the mac that will be performing the build
+    architectures:
+      x64:
+        buildFolder: 'macOS'
+  linux:
+    name: 'Linux (Ubuntu)'
+    module: './build/linux'
+    optionsFile: 'options/linux/options_linux.yy'
+    optionsVersionKey: 'option_linux_version'
+    targetDeviceName: "<linux device name as defined in GM>"
+    architectures:
+      x64:
+        buildFolder: 'Ubuntu'
+deploymentTargets:
+  steam:
+    name: 'Steam'
+    module: './deploy/steam'
+    requiresEntitlements: true #signals to the mac module that builds for steam require entitlements
+    alwaysUseSafeName: true #signals to the build module that steam builds should always use underscores instead of spaces (steam has trouble with spaces on some platforms)
+    buildSuffix: 'steam' #what suffix should be added to the output zip to identify this deployment target
+    moduleConfig:
+      contentBuilderRoot: 'C:\<path\to>\steamworks_142\sdk\tools\ContentBuilder' #the path to your steam SDK ContentBuilder folder
+      username: '<steam user id>' #steam login - this should be a separate login with limited permissions created only for builds
+      password: '<steam password>' #password for steam build account
+  itch:
+    name: 'Itch'
+    module: './deploy/itch'
+    buildSuffix: 'standalone'
+projects: #define however many projects you need - for example a demo and a full game may be configured separately, even if they share a yyp
+  shadowOfAyaDemo:
+    name: 'Shadow of Aya Demo' #internal friendly name used only for the CLI menu
+    projectFile: '<path/to/your/game>/Shadow of Aya.yyp' #path to your yyp file
+    buildDir: '<path/to/your/build/folder>\build' #base path where you want builds to be stored (individual builds will be placed under platform/version folders within this directory)
+    platforms: #platform specific config for this project
+      mac:
+        moduleConfig:
+          bundleid: "com.<myteam>.<mygame>" #the mac bundle id used to sign this project
+    deploymentTargets: #deployment specific config for this project
+      steam:
+        buildRoot: '<path/to/your/deployment/folder/>\deploy\steam' #the path where builds should be unpackaged to prepare for upload to the target
+        buildConfigs: #the build configs that should be used for this deployment target. these need to match the configs defined in your project in GMS
+          x64: 'steam_demo_release' #these can be whatever you name them in GMS
+          x86: 'steam_demo_release_x32'
+        moduleConfig: #target specific configs
+          appid: '<your game/demo app id>' #steam app id
+          platforms:
+            windows:
+              x64:
+                depotId: '<depot id>' #steam depot for the windows 64-bit build. these depots and their corresponding scripts should all be configured ahead of time
+              x86:
+                depotId: '<depot id>' #steam depot for the windows 32-bit build
+            mac:
+              x64:
+                depotId: '<depot id>' #steam depot for the mac build
+            linux:
+              x64:
+                depotId: '<depot id>' #steam depot for the linux build
+      itch:
+        buildRoot: '<path/to/your/deployment/folder/>\deploy\itch'
+        buildConfigs:
+          x64: 'standalone_demo_release'
+        moduleConfig:
+          account: '<itch username>'
+          gameid: '<itch game id>'
+          platforms:
+            windows:
+              channel: 'windows' #the itch channel you want to upload this platform build to
+            mac:
+              channel: 'mac'
+            linux:
+              channel: 'linux'

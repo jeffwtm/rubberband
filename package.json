@@ -8,6 +8,7 @@
     "start": "node cli.js"
   },
   "dependencies": {
+    "@incominggames/gamemaker-rubber": "^3.0.1",
     "adm-zip": "^0.5.1",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
@@ -15,7 +16,6 @@
     "config-yaml": "^1.1.6",
     "figlet": "^1.5.0",
     "fs-extra": "^9.0.1",
-    "gamemaker-rubber": "D:/Dev Projects/Rubber/",
     "inquirer": "^7.3.3",
     "node-vdf": "^0.0.3",
     "relaxed-json": "^1.0.3",

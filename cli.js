@@ -129,10 +129,10 @@ const run = async () => {
     
         console.log('Stretching...');
         for (const build of builds) {
-            startLogging(__dirname + `/log/${build.compileOptions.platform}.log`);
-            console.log(build.module);
+            // startLogging(__dirname + `/log/${build.compileOptions.platform}.log`);
+            // console.log(build.module);
             await build.module.build(build, skipBuilding);
-            finishLogging();
+            // finishLogging();
         }
 
         console.timeEnd('build');

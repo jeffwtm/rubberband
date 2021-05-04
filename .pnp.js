@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["@incominggames/gamemaker-rubber", "npm:3.0.1"],
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
@@ -44,7 +45,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
@@ -60,6 +60,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@heroku/socksv5", "npm:0.0.9"],
             ["ip-address", "npm:5.9.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@incominggames/gamemaker-rubber", [
+        ["npm:3.0.1", {
+          "packageLocation": "./.yarn/cache/@incominggames-gamemaker-rubber-npm-3.0.1-daaf25094a-ae6b55ecc4.zip/node_modules/@incominggames/gamemaker-rubber/",
+          "packageDependencies": [
+            ["@incominggames/gamemaker-rubber", "npm:3.0.1"],
+            ["chalk", "npm:2.4.2"],
+            ["cli", "npm:1.0.1"],
+            ["fs-extra", "npm:7.0.1"]
           ],
           "linkType": "HARD",
         }]
@@ -510,7 +522,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/fs-extra-npm-7.0.1-b33a5e53e9-0de3773953.zip/node_modules/fs-extra/",
           "packageDependencies": [
             ["fs-extra", "npm:7.0.1"],
-            ["graceful-fs", "npm:4.2.4"],
+            ["graceful-fs", "npm:4.2.6"],
             ["jsonfile", "npm:4.0.0"],
             ["universalify", "npm:0.1.2"]
           ],
@@ -546,23 +558,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["gamemaker-rubber", [
-        ["file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A.", {
-          "packageLocation": "./.yarn/cache/gamemaker-rubber-file-81cce40d41-dfe4b2ea2f.zip/node_modules/gamemaker-rubber/",
-          "packageDependencies": [
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
-            ["chalk", "npm:2.4.2"],
-            ["cli", "npm:1.0.1"],
-            ["fs-extra", "npm:7.0.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["gamemaker-rubberband", [
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
             ["gamemaker-rubberband", "workspace:."],
+            ["@incominggames/gamemaker-rubber", "npm:3.0.1"],
             ["adm-zip", "npm:0.5.1"],
             ["axios", "npm:0.21.1"],
             ["chalk", "npm:4.1.0"],
@@ -570,7 +571,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["config-yaml", "npm:1.1.6"],
             ["figlet", "npm:1.5.0"],
             ["fs-extra", "npm:9.0.1"],
-            ["gamemaker-rubber", "file:/D%3A/Dev Projects/Rubber/#/D%3A/Dev Projects/Rubber/::hash=26fb54&locator=gamemaker-rubberband%40workspace%3A."],
             ["inquirer", "npm:7.3.3"],
             ["node-vdf", "npm:0.0.3"],
             ["relaxed-json", "npm:1.0.3"],
@@ -625,6 +625,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/graceful-fs-npm-4.2.4-734467635f-d095ee4dc6.zip/node_modules/graceful-fs/",
           "packageDependencies": [
             ["graceful-fs", "npm:4.2.4"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:4.2.6", {
+          "packageLocation": "./.yarn/cache/graceful-fs-npm-4.2.6-535b2234f1-84d39c7756.zip/node_modules/graceful-fs/",
+          "packageDependencies": [
+            ["graceful-fs", "npm:4.2.6"]
           ],
           "linkType": "HARD",
         }]
