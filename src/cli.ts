@@ -1,24 +1,38 @@
+#!/usr/bin/env node
+
 import inquirer from 'inquirer'
 import chalk from 'chalk'
 import figlet from 'figlet'
 import fse from 'fs-extra'
 import { program } from 'commander'
 import config_yaml from 'config-yaml'
+import { join } from 'path'
 
-import { prepareBuilds } from './lib/build'
-import { CLIArguments, Config } from './types'
+// import { prepareBuilds } from './build'
+import { CLIArguments, RubberBandConfig, PrepareBuildsOptions } from './types'
+import { debugJobs, executeBuildJob, executeDeployJob, executePackageJob, prepareJobs } from './utils'
+
+let args: CLIArguments = {}
 
 program.version('0.0.1')
-const config: Config = config_yaml(__dirname + '/config.yml')
-let args: CLIArguments = {}
+program.option('-s, --skip-building', 'only perform pre & post build tasks during build step', false)
+program.option('--config <file.yml>', 'configuration file', 'config.yml')
+program.option('--options <file.yml>', 'build options file. if not provided will prompt for selections')
+program.option('--check-config', 'output job definitions ONLY, do not execute jobs', false)
+program.option('--debug', 'output debug info', false)
+
+program.parse(process.argv)
+args = program.opts()
+
+const configFile = args.config ?? 'config.yml'
+// console.log('config file:', configFile)
+const configPath = join(__dirname, configFile)
+// console.log('config path:', configPath)
+const config: RubberBandConfig = config_yaml(configPath)
+let options: PrepareBuildsOptions = {}
 let _stdout: any, _stderr: any
 
 const init = () => {
-  program.option('-s, --skip-building', 'only perform pre & post build tasks during build step')
-
-  program.parse(process.argv)
-  args = program.opts()
-
   console.log('--')
   console.log('-----')
   console.log('--------')
@@ -34,6 +48,8 @@ const init = () => {
   )
 
   if (args.skipBuilding) console.log('Skip building enabled.')
+  if (args.config) console.log(`Using config file ${args.config}`)
+  if (args.options) console.log(`Using options file ${args.options}`)
 }
 
 const prepareQuestions = () => {
@@ -132,49 +148,63 @@ const finishLogging = () => {
 const run = async () => {
   init()
 
-  const { skipBuilding } = args
+  const { skipBuilding, checkConfig, debug } = args
 
-  const prompts = prepareQuestions()
-  const options = await inquirer.prompt(prompts)
+  if (args.options) {
+    options = config_yaml(join(__dirname, args.options))
+  } else {
+    const prompts = prepareQuestions()
+    options = await inquirer.prompt(prompts)
+  }
+
   console.log()
   console.log()
 
   console.log('Flexing...')
-  const { builds, deploymentModules } = await prepareBuilds(options)
+  const jobs = await prepareJobs(config, options)
+  // const { builds, deploymentModules } = await prepareBuilds(config, options)
   // console.log(builds);
   console.log('Done.')
   console.log()
 
-  if (options.actions.includes('build')) {
+  if (checkConfig || debug) {
+    if (checkConfig) console.log(JSON.stringify(jobs, undefined, 2))
+    if (debug) await debugJobs(jobs)
+    return
+  }
+
+  if (options.actions?.includes('build')) {
     console.time('build')
 
     console.log('Stretching...')
-    for (const build of builds) {
+    for (const buildJob of jobs.build) {
       // startLogging(__dirname + `/log/${build.compileOptions.platform}.log`);
       // console.log(build.module);
-      await build.module.build(build, { skipBuilding })
+      await executeBuildJob(buildJob, { skipBuilding })
       // finishLogging();
     }
 
     console.timeEnd('build')
   }
 
-  if (options.actions.includes('package')) {
+  if (options.actions?.includes('package')) {
     console.time('package')
 
     console.log('Aiming...')
-    for (const build of builds) {
-      await build.module.package(build)
+    for (const packageJob of jobs.package) {
+      await executePackageJob(packageJob)
     }
 
     console.timeEnd('package')
   }
 
-  if (options.actions.includes('deploy')) {
+  if (options.actions?.includes('deploy')) {
     console.time('deploy')
 
     console.log('Releasing...')
-    for (const deploymentModule in deploymentModules) await deploymentModules[deploymentModule].deploy(builds)
+    for (const deployJob of jobs.deploy) {
+      await executeDeployJob(deployJob)
+    }
 
     console.timeEnd('deploy')
   }

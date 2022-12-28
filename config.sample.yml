@@ -18,15 +18,15 @@ platforms: #configuration for all available build platforms
     module: './build/mac'
     optionsFile: 'options/mac/options_mac.yy'
     optionsVersionKey: 'option_mac_version'
-    targetDeviceName: "<mac device name as defined in GM>" #this should be the display name you chose when configuring your mac device in GMS, e.g. "Macbook Pro", "My iMac", etc
+    targetDeviceName: '<mac device name as defined in GM>' #this should be the display name you chose when configuring your mac device in GMS, e.g. "Macbook Pro", "My iMac", etc
     moduleConfig: #some platforms require specific
       host: '<mac ip address>'
       username: '<mac username>'
       password: '<mac password>'
-      buildPath: "/Users/<mac username>/<path/to/build>" #the base path where you want the build, signing, and notarization output to be stored. doesn't have to be under Users, as long as the logged in user has permissions for it
-      appleUser: "<apple id email>" #your apple developer account email (the one used for login)
-      applePassword: "<apple id password>" #this needs to be a single-use password generated with apple to bypass 2FA
-      providerShortName: "<team identifier>" #your team identifier from your apple dev account. alphanumeric, something along the lines of ABCDE1234
+      buildPath: '/Users/<mac username>/<path/to/build>' #the base path where you want the build, signing, and notarization output to be stored. doesn't have to be under Users, as long as the logged in user has permissions for it
+      appleUser: '<apple id email>' #your apple developer account email (the one used for login)
+      applePassword: '<apple id password>' #this needs to be a single-use password generated with apple to bypass 2FA
+      providerShortName: '<team identifier>' #your team identifier from your apple dev account. alphanumeric, something along the lines of ABCDE1234
       signingCertificate: 'Developer ID Application: <company/team name> (<team identifier>)' #the signing certificate you want to use. this has to be registered on the mac that will be performing the build
     architectures:
       x64:
@@ -36,7 +36,7 @@ platforms: #configuration for all available build platforms
     module: './build/linux'
     optionsFile: 'options/linux/options_linux.yy'
     optionsVersionKey: 'option_linux_version'
-    targetDeviceName: "<linux device name as defined in GM>"
+    targetDeviceName: '<linux device name as defined in GM>'
     architectures:
       x64:
         buildFolder: 'Ubuntu'
@@ -63,7 +63,7 @@ projects: #define however many projects you need - for example a demo and a full
     platforms: #platform specific config for this project
       mac:
         moduleConfig:
-          bundleid: "com.<myteam>.<mygame>" #the mac bundle id used to sign this project
+          bundleid: 'com.<myteam>.<mygame>' #the mac bundle id used to sign this project
     deploymentTargets: #deployment specific config for this project
       steam:
         buildRoot: '<path/to/your/deployment/folder/>\deploy\steam' #the path where builds should be unpackaged to prepare for upload to the target
@@ -72,10 +72,11 @@ projects: #define however many projects you need - for example a demo and a full
           x86: 'steam_demo_release_x32'
         moduleConfig: #target specific configs
           appid: '<your game/demo app id>' #steam app id
+          releaseToBranch: '<your branch name>' #steam branch to set your deployment live on when uploading is complete. cannot be 'default'
           platforms:
             windows:
               x64:
-                depotId: '<depot id>' #steam depot for the windows 64-bit build. these depots and their corresponding scripts should all be configured ahead of time
+                depotId: '<depot id>' #steam depot for the windows 64-bit build. the depots must be configured in steamworks ahead of time
               x86:
                 depotId: '<depot id>' #steam depot for the windows 32-bit build
             mac:

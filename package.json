@@ -1,10 +1,15 @@
 {
-  "name": "gamemaker-rubberband",
+  "name": "@incominggames/gamemaker-rubberband",
+  "version": "0.1.0",
+  "description": "An automated build & deployment tool for GameMaker Studio 2",
+  "main": "built/index.js",
+  "files": [
+    "/built",
+    "/asset"
+  ],
   "scripts": {
-    "build": "node build.js",
-    "clear": "node clearCache.js",
-    "deploy": "node deploy.js",
-    "debug": "node debug.js",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
     "start": "node built/cli.js"
   },
   "dependencies": {
@@ -20,7 +25,8 @@
     "node-vdf": "^0.0.3",
     "relaxed-json": "^1.0.3",
     "scp2": "^0.5.0",
-    "ssh2-promise": "^0.1.7"
+    "ssh2-promise": "^0.1.7",
+    "ts-deepmerge": "^5.0.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
@@ -29,12 +35,35 @@
     "@types/figlet": "^1.5.4",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.1",
-    "@types/node": "^18.0.5",
+    "@types/node": "^16.11.0",
     "@types/relaxed-json": "^1.0.1",
     "@typescript-eslint/parser": "^5.30.6",
     "eslint": "^8.19.0",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
     "typescript": "^4.7.4"
-  }
+  },
+  "keywords": [
+    "gamemaker",
+    "compilation",
+    "packaging",
+    "deployment",
+    "CI/CD"
+  ],
+  "bin": {
+    "gamemaker-rubberband": "built/cli.js",
+    "rubberband": "built/cli.js"
+  },
+  "author": "jeffwtm",
+  "homepage": "https://github.com/jeffwtm/rubberband#readme",
+  "bugs": {
+    "url": "https://github.com/jeffwtm/rubberband/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffwtm/rubberband"
+  },
+  "readme": "README.md",
+  "license": "MIT",
+  "packageManager": "yarn@3.3.0"
 }
