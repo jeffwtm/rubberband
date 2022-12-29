@@ -26,7 +26,7 @@ args = program.opts()
 
 const configFile = args.config ?? 'config.yml'
 // console.log('config file:', configFile)
-const configPath = join(__dirname, configFile)
+const configPath = join(process.cwd(), configFile)
 // console.log('config path:', configPath)
 const config: RubberBandConfig = config_yaml(configPath)
 let options: PrepareBuildsOptions = {}
@@ -151,7 +151,7 @@ const run = async () => {
   const { skipBuilding, checkConfig, debug } = args
 
   if (args.options) {
-    options = config_yaml(join(__dirname, args.options))
+    options = config_yaml(join(process.cwd(), args.options))
   } else {
     const prompts = prepareQuestions()
     options = await inquirer.prompt(prompts)

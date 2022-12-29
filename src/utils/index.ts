@@ -6,7 +6,7 @@ export * from './misc'
 export * from './jobs'
 
 export const getProjectBuildRoot = (globalConfig: GlobalConfig, projectConfig: ProjectConfig) =>
-  projectConfig.buildRoot ?? globalConfig.buildRoot ?? join(__dirname, 'build')
+  projectConfig.buildRoot ?? globalConfig.buildRoot ?? join(process.cwd(), 'build')
 
 export const getProjectBuildDir = (
   globalConfig: GlobalConfig,
@@ -18,7 +18,7 @@ export const getProjectBuildDir = (
 }
 
 export const getProjectDeployRoot = (globalConfig: GlobalConfig, projectConfig: ProjectConfig) =>
-  projectConfig.deployRoot ?? globalConfig.deployRoot ?? join(__dirname, 'deploy')
+  projectConfig.deployRoot ?? globalConfig.deployRoot ?? join(process.cwd(), 'deploy')
 
 export const getProjectDeployDir = (
   globalConfig: GlobalConfig,
