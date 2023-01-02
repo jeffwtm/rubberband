@@ -6,6 +6,7 @@ export type GlobalConfig = {
   gamemakerPath: string
   tempFolder: string
   deviceConfigFileLocation: string
+  runtimeLocation?: string
   buildRoot?: string
   deployRoot?: string
 }

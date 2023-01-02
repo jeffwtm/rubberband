@@ -1,3 +1,5 @@
+import { isAbsolute, join } from "path"
+
 export const parseCliResponseObject = (response: string[], fields: string[]) => {
   return response
     .filter((l) => fields.some((f) => l.includes(f + ': ') || l.includes(f + ' = ')))
@@ -30,24 +32,6 @@ export const isObject = function (item: unknown): item is Record<string, unknown
  * @param target
  * @param ...sources
  */
-// export const mergeDeep2 = function (target: any, ...sources: any): any {
-//   if (!sources.length) return target
-//   const source = sources.shift()
-
-//   if (isObject(target) && isObject(source)) {
-//     for (const key in source) {
-//       if (isObject(source[key])) {
-//         if (!target[key]) Object.assign(target, { [key]: {} })
-//         mergeDeep(target[key], source[key])
-//       } else {
-//         Object.assign(target, { [key]: source[key] })
-//       }
-//     }
-//   }
-
-//   return mergeDeep(target, ...sources)
-// }
-
 export const mergeDeep = function <T1 extends Record<string, unknown>, T2, T3, T4>(
   target: T1,
   ...sources: Array<T2 | T3 | T4>
@@ -72,3 +56,5 @@ const mergeDeepInner = function <T1 extends Record<string, unknown>, T2, T3, T4>
 
   return mergeDeepInner(target, ...sources) as T1 & T2 & T3 & T4
 }
+
+export const getAbsolutePath = (path: string) => isAbsolute(path) ? path : join(process.cwd(), path)

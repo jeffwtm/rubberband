@@ -10,7 +10,7 @@ import { join } from 'path'
 
 // import { prepareBuilds } from './build'
 import { CLIArguments, RubberBandConfig, PrepareBuildsOptions } from './types'
-import { debugJobs, executeBuildJob, executeDeployJob, executePackageJob, prepareJobs } from './utils'
+import { debugJobs, executeBuildJob, executeDeployJob, executePackageJob, getAbsolutePath, prepareJobs } from './utils'
 
 let args: CLIArguments = {}
 
@@ -26,7 +26,7 @@ args = program.opts()
 
 const configFile = args.config ?? 'config.yml'
 // console.log('config file:', configFile)
-const configPath = join(process.cwd(), configFile)
+const configPath = getAbsolutePath(configFile)
 // console.log('config path:', configPath)
 const config: RubberBandConfig = config_yaml(configPath)
 let options: PrepareBuildsOptions = {}
@@ -151,7 +151,7 @@ const run = async () => {
   const { skipBuilding, checkConfig, debug } = args
 
   if (args.options) {
-    options = config_yaml(join(process.cwd(), args.options))
+    options = config_yaml(getAbsolutePath(args.options))
   } else {
     const prompts = prepareQuestions()
     options = await inquirer.prompt(prompts)

@@ -45,7 +45,7 @@ export const getBuildJobDefinition = ({
     projectPath,
   } = buildConfig
 
-  const { gamemakerPath, tempFolder, deviceConfigFileLocation } = globalConfig
+  const { gamemakerPath, tempFolder, deviceConfigFileLocation, runtimeLocation } = globalConfig
   const { targetDeviceName } = platformConfig
   const { buildFolder } = architectureConfig
   const { projectFile } = projectConfig
@@ -58,6 +58,7 @@ export const getBuildJobDefinition = ({
     buildPlatformOptions,
     compileOptions: {
       projectPath: projectFile,
+      runtimeLocation,
       yyc: true,
       verbose: true,
       config: gmsBuildConfig,

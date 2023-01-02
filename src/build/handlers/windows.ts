@@ -8,7 +8,6 @@ export const WindowsBuildHandler: BuildHandler = {
   ...BaseBuildHandler,
   getBuildVersion: async function (config: PreBuildOptions) {
     const { optionsFilename, optionsVersionKey, projectPathname, incrementBuild } = config
-    console.log('obj', BaseBuildHandler, this)
     const { platformOptions, optionsFile, optionsPathname } = await this.getPlatformOptions({
       optionsFilename,
       projectPathname,

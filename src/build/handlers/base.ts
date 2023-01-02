@@ -1,4 +1,4 @@
-import rubber from '@incominggames/gamemaker-rubber'
+import * as rubber from '@incominggames/gamemaker-rubber'
 
 import AdmZip from 'adm-zip'
 import fse from 'fs-extra'
