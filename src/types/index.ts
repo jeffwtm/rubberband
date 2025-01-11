@@ -13,10 +13,18 @@ export type CLIArguments = {
   options?: string
   checkConfig?: boolean
   debug?: boolean
+  getVersion?: boolean
+  clean?: boolean
 }
 
 export interface RubberBandJobs extends Record<BuildAction, JobDefinition[]> {
   build: BuildJobDefinition[]
   package: PackageJobDefinition[]
   deploy: DeployJobDefinition[]
+}
+
+export type VersionComponents = {
+  major: number
+  minor: number
+  build: number
 }

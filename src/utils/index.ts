@@ -4,6 +4,7 @@ import { DeploymentTargetType, GlobalConfig, ProjectConfig } from '../types'
 export * from './shell'
 export * from './misc'
 export * from './jobs'
+export * from './gamemaker'
 
 export const getProjectBuildRoot = (globalConfig: GlobalConfig, projectConfig: ProjectConfig) =>
   projectConfig.buildRoot ?? globalConfig.buildRoot ?? join(process.cwd(), 'build')

@@ -10,7 +10,15 @@ import { join } from 'path'
 
 // import { prepareBuilds } from './build'
 import { CLIArguments, RubberBandConfig, PrepareBuildsOptions } from './types'
-import { debugJobs, executeBuildJob, executeDeployJob, executePackageJob, getAbsolutePath, prepareJobs } from './utils'
+import {
+  debugJobs,
+  executeBuildJob,
+  executeDeployJob,
+  executePackageJob,
+  getAbsolutePath,
+  getProjectVersion,
+  prepareJobs,
+} from './utils'
 
 let args: CLIArguments = {}
 
@@ -20,6 +28,8 @@ program.option('--config <file.yml>', 'configuration file', 'config.yml')
 program.option('--options <file.yml>', 'build options file. if not provided will prompt for selections')
 program.option('--check-config', 'output job definitions ONLY, do not execute jobs', false)
 program.option('--debug', 'output debug info', false)
+program.option('--get-version', 'returns the current version of the project', false)
+program.option('--clean', 'cleans the cache', false)
 
 program.parse(process.argv)
 args = program.opts()
@@ -146,9 +156,11 @@ const finishLogging = () => {
 }
 
 const run = async () => {
-  init()
+  const { skipBuilding, checkConfig, debug, getVersion, clean } = args
 
-  const { skipBuilding, checkConfig, debug } = args
+  if (!getVersion) {
+    init()
+  }
 
   if (args.options) {
     options = config_yaml(getAbsolutePath(args.options))
@@ -157,19 +169,28 @@ const run = async () => {
     options = await inquirer.prompt(prompts)
   }
 
-  console.log()
-  console.log()
+  if (!getVersion) {
+    console.log()
+    console.log()
 
-  console.log('Flexing...')
+    console.log('Flexing...')
+  }
   const jobs = await prepareJobs(config, options)
   // const { builds, deploymentModules } = await prepareBuilds(config, options)
   // console.log(builds);
-  console.log('Done.')
-  console.log()
+  if (!getVersion) {
+    console.log('Done.')
+    console.log()
+  }
 
   if (checkConfig || debug) {
     if (checkConfig) console.log(JSON.stringify(jobs, undefined, 2))
     if (debug) await debugJobs(jobs)
+    return
+  }
+
+  if (getVersion) {
+    console.log(getProjectVersion())
     return
   }
 
@@ -180,12 +201,14 @@ const run = async () => {
     for (const buildJob of jobs.build) {
       // startLogging(__dirname + `/log/${build.compileOptions.platform}.log`);
       // console.log(build.module);
-      await executeBuildJob(buildJob, { skipBuilding })
+      await executeBuildJob(buildJob, { skipBuilding, clean })
       // finishLogging();
     }
 
     console.timeEnd('build')
   }
+
+  if (clean) return
 
   if (options.actions?.includes('package')) {
     console.time('package')

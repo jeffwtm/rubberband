@@ -1,6 +1,5 @@
 import { dirname, basename, extname } from 'path'
 import { BuildHandler, buildHandlers } from '../../build/handlers'
-import { BaseBuildHandler } from '../../build/handlers/base'
 import {
   RubberBandConfig,
   PrepareBuildsOptions,
@@ -13,9 +12,11 @@ import {
   PlatformType,
   DeploymentTargetType,
   ProjectBranchConfig,
+  VersionComponents,
+  GMSProjectVersion,
 } from '../../types'
 import { BuildJobDefinition, DeployJobDefinition, PackageJobDefinition } from '../../types/jobs'
-import { mergeDeep } from '../misc'
+import { getHighestVersion, mergeDeep, parseVersionComponents } from '../misc'
 import { debugBuildJob, executeBuildJob, getBuildJobDefinition } from './build'
 import { debugDeployJob, executeDeployJob, getDeployBuildDefinition, getDeployJobDefinition } from './deploy'
 import { executePackageJob, getPackageJobDefinition } from './package'
@@ -23,6 +24,9 @@ import { executePackageJob, getPackageJobDefinition } from './package'
 export * from './build'
 export * from './package'
 export * from './deploy'
+
+const versions: VersionComponents[] = []
+let syncVersion: GMSProjectVersion
 
 export const prepareJobs = async (
   config: RubberBandConfig,
@@ -41,6 +45,19 @@ export const prepareJobs = async (
   const buildJobs = jobs.map((job) => job.build).flat()
   const packageJobs = jobs.map((job) => job.package).flat()
   const deployJobs = jobs.map((job) => job.deploy).flat()
+
+  syncVersion = getHighestVersion(versions)
+  if (options.keepVersionsInSync) {
+    await Promise.all(
+      buildJobs.map((job) =>
+        buildHandlers[job.buildPlatform].setBuildVersion(syncVersion, {
+          projectPathname: job.compileOptions.projectPath,
+          optionsFilename: job.optionsFile,
+          optionsVersionKey: job.optionsVersionKey,
+        })
+      )
+    )
+  }
 
   return { build: buildJobs, package: packageJobs, deploy: deployJobs }
 }
@@ -75,6 +92,8 @@ export const getProjectJobs = async (
       incrementBuild: options.incrementBuild,
     })
 
+    versions.push(parseVersionComponents(platformBuildVersion))
+
     let architecture: ArchitectureType
     for (architecture in platformConfig.architectures) {
       if (options.architectures && !options.architectures.includes(architecture)) continue
@@ -107,7 +126,7 @@ export const getProjectJobs = async (
           buildJobs.push(
             getBuildJobDefinition({
               buildConfig,
-              platformConfig,
+              platformConfig: projectPlatformConfig,
               architectureConfig,
               projectConfig,
               globalConfig: config.global,
@@ -188,3 +207,5 @@ export const debugJobs = async (jobs: RubberBandJobs, options?: any) => {
     await debugDeployJob(deployJob)
   }
 }
+
+export const getProjectVersion = () => syncVersion

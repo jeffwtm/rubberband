@@ -45,8 +45,8 @@ export const getBuildJobDefinition = ({
     projectPath,
   } = buildConfig
 
-  const { gamemakerPath, tempFolder, deviceConfigFileLocation, runtimeLocation } = globalConfig
-  const { targetDeviceName } = platformConfig
+  const { gamemakerPath, tempFolder, deviceConfigFileLocation, runtimeLocation, userDataLocation } = globalConfig
+  const { targetDeviceName, compileToVM, optionsFile, optionsVersionKey } = platformConfig
   const { buildFolder } = architectureConfig
   const { projectFile } = projectConfig
 
@@ -59,7 +59,7 @@ export const getBuildJobDefinition = ({
     compileOptions: {
       projectPath: projectFile,
       runtimeLocation,
-      yyc: true,
+      yyc: !compileToVM,
       verbose: true,
       config: gmsBuildConfig,
       build: 'zip',
@@ -72,12 +72,15 @@ export const getBuildJobDefinition = ({
       gamemakerLocation: gamemakerPath,
       tempFolder,
       deviceConfigFileLocation,
+      userDataLocation,
       targetDeviceName,
       platform: platform as IRubberOptions['platform'],
     },
     deploymentTarget,
     deploymentTargetOptions,
     logName: `${projectSafeName}-${platform}-${deploymentTargetOptions.buildSuffix}`,
+    optionsFile,
+    optionsVersionKey,
     platformName,
     projectPath,
     projectName,

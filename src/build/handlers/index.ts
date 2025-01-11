@@ -22,6 +22,7 @@ export type BuildHandler = {
     optionsFilename: string
   }): Promise<{ platformOptions: GMSOptions; optionsFile: Buffer; optionsPathname: string }>
   getBuildVersion(options: PreBuildOptions): Promise<GMSProjectVersion>
+  setBuildVersion(version: GMSProjectVersion, options: PreBuildOptions): Promise<void>
   build(buildJob: BuildJobDefinition, moduleConfig?: any, options?: any): Promise<boolean>
   package(packageJob: PackageJobDefinition): Promise<void>
   outputDebugInfo(buildJob: BuildJobDefinition, moduleConfig?: any, options?: any): Promise<void>

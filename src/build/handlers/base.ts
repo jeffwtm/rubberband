@@ -47,14 +47,26 @@ export const BaseBuildHandler: BuildHandler = {
 
     return version
   },
-  async build(buildJob: BuildJobDefinition) {
+  async setBuildVersion(version: GMSProjectVersion, options: PreBuildOptions) {
+    const { optionsFilename, optionsVersionKey, projectPathname } = options
+    const { optionsFile, optionsPathname } = await this.getPlatformOptions({
+      optionsFilename,
+      projectPathname,
+    })
+
+    const updateVersionRegex = new RegExp(`(\\"${optionsVersionKey}\\"\\: \\")([0-9\\.]+)(\\")`)
+    const updatedOptionsFile = optionsFile.toString().replace(updateVersionRegex, `$1${version}$3`)
+    await fse.writeFile(optionsPathname, updatedOptionsFile)
+  },
+  async build(buildJob: BuildJobDefinition, _moduleConfig: any, { clean }) {
     // this.logStream = fse.createWriteStream(__dirname + '/../../log/' + config.logName + '.log')
     const { buildPath, compileOptions } = buildJob
 
     await fse.mkdirs(buildPath)
 
     await new Promise<void>((resolve, reject) => {
-      const execution = rubber.compile(compileOptions, false)
+      // console.log('compile options', compileOptions)
+      const execution = rubber.compile(compileOptions, !!clean)
       execution.on('compileStatus', logData)
       execution.on('gameStatus', logData)
       execution.on('allFinished', async (errors) => {

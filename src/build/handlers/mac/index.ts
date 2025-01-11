@@ -6,6 +6,7 @@ import { signAndNotarize } from './utils'
 import { Shell } from '../../../utils/shell'
 import { BuildJobDefinition, MacModuleConfig, PackageJobDefinition } from '../../../types'
 import { BaseBuildHandler } from '../base'
+import { decrypt, getDevices, getLicense } from '../../../utils'
 
 export type MacBuildOptions = {
   skipBuilding?: boolean
@@ -81,5 +82,16 @@ export const MacBuildHandler: BuildHandler = {
 
     const { deploymentPath } = packageJob
     await fse.remove(join(deploymentPath, '__MACOSX'))
+  },
+  async outputDebugInfo(buildJob: BuildJobDefinition) {
+    const devices = await getDevices()
+    const macDevices = devices.mac
+
+    const targetDevice = macDevices[buildJob.compileOptions.targetDeviceName ?? '']
+    const license = (await getLicense()) as any
+
+    const password = decrypt(targetDevice?.encrypted_password, license.email)
+
+    console.log('devices', targetDevice, license, license.email, password)
   },
 }

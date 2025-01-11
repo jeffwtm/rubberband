@@ -1,4 +1,5 @@
 export * from './mac'
+export * from './linux'
 export * from './steam'
 export * from './itch'
 
@@ -7,6 +8,7 @@ export type GlobalConfig = {
   tempFolder: string
   deviceConfigFileLocation: string
   runtimeLocation?: string
+  userDataLocation?: string
   buildRoot?: string
   deployRoot?: string
 }
@@ -26,6 +28,7 @@ export type PlatformConfig = {
   targetDeviceName?: string
   moduleConfig?: Record<string, unknown>
   architectures: Record<ArchitectureType, ArchitectureConfig>
+  compileToVM?: boolean
 }
 
 export type ProjectPlatformConfig = Partial<PlatformConfig>

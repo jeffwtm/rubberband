@@ -1,4 +1,6 @@
-import { isAbsolute, join } from "path"
+import { isAbsolute, join } from 'path'
+import { GMSProjectVersion, VersionComponents } from '../types'
+import { componentsToGMSVersion } from './gamemaker'
 
 export const parseCliResponseObject = (response: string[], fields: string[]) => {
   return response
@@ -57,4 +59,47 @@ const mergeDeepInner = function <T1 extends Record<string, unknown>, T2, T3, T4>
   return mergeDeepInner(target, ...sources) as T1 & T2 & T3 & T4
 }
 
-export const getAbsolutePath = (path: string) => isAbsolute(path) ? path : join(process.cwd(), path)
+export const getAbsolutePath = (path: string) => (isAbsolute(path) ? path : join(process.cwd(), path))
+
+export const xorString = (message: string, salt: string) => {
+  const result = []
+  for (let i = 0; i < message.length; i++) {
+    result.push(message.charCodeAt(i) ^ salt.charCodeAt(i % salt.length))
+  }
+  return String.fromCharCode(...result)
+}
+export const xorString2 = (message: string, salt: string) => {
+  const result = []
+  for (let i = 0; i < message.length; i++) {
+    const charCode = message.charCodeAt(i)
+    // Check if the character is uppercase or lowercase
+    const isUpper = charCode >= 65 && charCode <= 90
+    const xorCharCode = (isUpper ? charCode | 32 : charCode) ^ salt.charCodeAt(i % salt.length)
+    result.push(isUpper ? xorCharCode & 95 : xorCharCode)
+  }
+  return String.fromCharCode(...result)
+}
+
+export const decrypt = (encryptedString: string, key: string) => {
+  const salt = Buffer.from(key).toString('hex')
+  return xorString(Buffer.from(encryptedString, 'base64').toString(), salt)
+}
+
+export const parseVersionComponents = (version: string): VersionComponents => {
+  const [major, minor, build] = version.split('.').map((versionNumber) => parseInt(versionNumber))
+  return { major, minor, build }
+}
+
+export const getHighestVersion = (versions: VersionComponents[]): GMSProjectVersion => {
+  let version: VersionComponents = {
+    major: 0,
+    minor: 0,
+    build: 0,
+  }
+  versions.forEach((v) => {
+    if (v.major > version.major) version = v
+    else if (v.minor > version.minor) version = v
+    else if (v.build > version.build) version = v
+  })
+  return componentsToGMSVersion(version)
+}

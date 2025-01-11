@@ -10,6 +10,7 @@ export type BuildHandlers = Record<PlatformType, BuildHandler>
 export type PrepareBuildsOptions = {
   actions?: BuildAction[]
   incrementBuild?: boolean
+  keepVersionsInSync?: boolean
   projects?: string[]
   platforms?: string[]
   architectures?: string[]

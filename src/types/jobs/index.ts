@@ -11,6 +11,8 @@ export type BuildJobDefinition = {
   deploymentTarget: DeploymentTargetType
   deploymentTargetOptions: any
   logName: string
+  optionsFile: string
+  optionsVersionKey: string
   platformName: string
   projectName: string
   projectPath: string
