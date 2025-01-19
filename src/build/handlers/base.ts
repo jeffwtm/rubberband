@@ -37,7 +37,7 @@ export const BaseBuildHandler: BuildHandler = {
     if (incrementBuild) {
       build++
 
-      const updateVersionRegex = new RegExp(`(\\"${optionsVersionKey}\\"\\: \\")([0-9\\.]+)(\\")`)
+      const updateVersionRegex = new RegExp(`(\\"${optionsVersionKey}\\"\\: ?\\")([0-9\\.]+)(\\")`)
       const updatedOptionsFile = optionsFile.toString().replace(updateVersionRegex, `$1${major}.${minor}.${build}$3`)
       await fse.writeFile(optionsPathname, updatedOptionsFile)
     }
