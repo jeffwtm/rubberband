@@ -1,6 +1,7 @@
 import { IRubberOptions } from '@incominggames/gamemaker-rubber'
 import { join } from 'path'
 import { getProjectBuildDir } from '..'
+import { BuildOptions } from '../../build'
 import { buildHandlers } from '../../build/handlers'
 import {
   BuildConfig,
@@ -92,13 +93,13 @@ export const getBuildJobDefinition = ({
   return job
 }
 
-export const executeBuildJob = async (buildJob: BuildJobDefinition, options?: any) => {
+export const executeBuildJob = async (buildJob: BuildJobDefinition, options?: BuildOptions) => {
   const { buildPlatform, buildPlatformOptions } = buildJob
   const buildHandler = buildHandlers[buildPlatform]
   await buildHandler.build(buildJob, buildPlatformOptions, options)
 }
 
-export const debugBuildJob = async (buildJob: BuildJobDefinition, options?: any) => {
+export const debugBuildJob = async (buildJob: BuildJobDefinition, options?: BuildOptions) => {
   const { buildPlatform, buildPlatformOptions } = buildJob
   const buildHandler = buildHandlers[buildPlatform]
   await buildHandler.outputDebugInfo(buildJob, buildPlatformOptions, options)

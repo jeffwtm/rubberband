@@ -5,3 +5,8 @@ export type PreBuildOptions = {
   optionsFilename: string
   optionsVersionKey: string
 } & PrepareBuildsOptions
+
+export type BuildOptions = {
+  skipBuilding?: boolean
+  clean?: boolean
+}

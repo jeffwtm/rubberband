@@ -6,7 +6,7 @@ import RJSON from 'relaxed-json'
 import { dirname, join } from 'path'
 import { BuildHandler } from '.'
 import { GMSOptions, GMSProjectVersion, BuildJobDefinition, PackageJobDefinition } from '../../types'
-import { PreBuildOptions } from '../types'
+import { BuildOptions, PreBuildOptions } from '../types'
 
 const logData = (data: any) => {
   const output = data.toString().trim()
@@ -30,9 +30,11 @@ export const BaseBuildHandler: BuildHandler = {
       projectPathname,
     })
 
-    let [major, minor, build] = platformOptions[optionsVersionKey]
-      .split('.')
-      .map((versionNumber) => parseInt(versionNumber))
+    const currentVersion = platformOptions[optionsVersionKey]
+
+    // console.log(`Current version number: ${currentVersion}`)
+
+    let [major, minor, build] = currentVersion.split('.').map((versionNumber) => parseInt(versionNumber))
 
     if (incrementBuild) {
       build++
@@ -43,7 +45,6 @@ export const BaseBuildHandler: BuildHandler = {
     }
 
     const version: GMSProjectVersion = `${major}.${minor}.${build}`
-    // this.gmsPlatformOptions = options_platform
 
     return version
   },
@@ -54,12 +55,18 @@ export const BaseBuildHandler: BuildHandler = {
       projectPathname,
     })
 
-    const updateVersionRegex = new RegExp(`(\\"${optionsVersionKey}\\"\\: \\")([0-9\\.]+)(\\")`)
+    const updateVersionRegex = new RegExp(`(\\"${optionsVersionKey}\\"\\: ?\\")([0-9\\.]+)(\\")`)
     const updatedOptionsFile = optionsFile.toString().replace(updateVersionRegex, `$1${version}$3`)
     await fse.writeFile(optionsPathname, updatedOptionsFile)
+
+    console.log(`Version updated to: ${version}`)
   },
-  async build(buildJob: BuildJobDefinition, _moduleConfig: any, { clean }) {
+  async build(buildJob: BuildJobDefinition, _moduleConfig: any, { skipBuilding, clean }: BuildOptions) {
     // this.logStream = fse.createWriteStream(__dirname + '/../../log/' + config.logName + '.log')
+    if (skipBuilding) {
+      return true
+    }
+
     const { buildPath, compileOptions } = buildJob
 
     await fse.mkdirs(buildPath)

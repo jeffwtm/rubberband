@@ -48,6 +48,7 @@ export const prepareJobs = async (
 
   syncVersion = getHighestVersion(versions)
   if (options.keepVersionsInSync) {
+    console.log('Syncing versions...')
     await Promise.all(
       buildJobs.map((job) =>
         buildHandlers[job.buildPlatform].setBuildVersion(syncVersion, {
